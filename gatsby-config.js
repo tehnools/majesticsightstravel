@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby + Netlify CMS Starter',
+    title: 'Majestic Sights Travel',
     description:
-      'This repo contains an example business website that is built with Gatsby, and Netlify CMS.It follows the JAMstack architecture by using Git as a single source of truth, and Netlify for continuous deployment, and CDN distribution.',
+      'Majestic Sights offers many tour packages around New Zealand. Customizable packages. Easy to use interface to book your packages. Call us for more information.',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
