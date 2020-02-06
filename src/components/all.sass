@@ -10,8 +10,15 @@ $primary-invert: $majestic-green-invert
 $body-color: #000
 $black: #2b2523
 
-.navbar .navbar-menu
-  box-shadow:none !important
+@mixin gradient($direction, $list...) 
+  background: -webkit-linear-gradient($direction, $list)
+  background: -moz-linear-gradient($direction, $list)
+  background: -o-linear-gradient($direction, $list)
+  background: linear-gradient($direction, $list)
+
+navbar-item a
+  &:hover
+    color: $primary
 
 .content .taglist
   list-style: none
@@ -74,6 +81,24 @@ $black: #2b2523
 .margin-top-0
   margin-top: 0 !important
 
+.navbar
+  top: 0
+  left: 0
+  position: absolute
+  background-color: white
+  z-index: 99
+  width: 100vw
+
+.navbar .navbar-
+  box-shadow:none !important
+
+.navbar-start a
+  color: white
+
+.is-transparent 
+    background: transparent
+    background-image: none
+
 .navbar-item .icon
   color: $primary
 // Override for use of svg's from https://simpleicons.org/
@@ -81,6 +106,29 @@ $black: #2b2523
   width: 1.5rem
   height: 1.5rem
   fill: black
+
+.navbar-item.logo
+  color: white
+  font-size: 1.25em
+  font-weight: 600
+
+.navbar-burger
+  color : white
+
+.navbar-sticky
+  position: fixed
+  animation: moveDown 0.5s ease-in-out
+  .navbar-start a
+    color: black
+  .navbar-item.logo
+    color: black
+  .navbar-burger
+    color : black
+
+.navbar-sticky > .navbar .logo
+  color: black
+
+
 .navbar-brand .navbar-item.logo
   padding: 0 1rem
 footer.footer
@@ -135,9 +183,32 @@ $menu-label-color: $white-ter
     flex-basis: 50%;
 
 +mobile
+  .navbar
+    top: 0
+    position: fixed
+  .navbar-start a 
+    color: black
+  .full-width-image
+    height: 300px
+  .black-overlay
+    height: 301px
+  .header-logo
+    width: 150px
   .blog-list-item header
     display: block
   .blog-list-item .featured-thumbnail
-    text-align: center;
-    max-width: 70%;
-    margin: 0 0 1em;
+    text-align: center
+    max-width: 70%
+    margin: 0 0 1em
+
+@keyframes moveDown 
+  from 
+    transform: translateY(-5rem)
+  to 
+    transform: translateY(0rem)
+
+@keyframes rotate 
+  0% 
+    transform: rotateY(360deg)
+  100% 
+    transform: rotateY(0rem)
