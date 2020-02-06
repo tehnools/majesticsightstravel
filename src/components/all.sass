@@ -68,17 +68,17 @@ navbar-item a
   position: absolute
   z-index: 1
   background-color: rgba(0,0,0,0.3)
-  @include gradient(bottom, $black 1%, rgba(0,0,0,0.3))
+  @include gradient(bottom, $black 1%, rgba(0,0,0,0.1))
   width: 100vw
   height: inherit
 
 .black-overlay
   position: absolute
-  z-index: 2
+  z-index: 1
   background-color: rgba(0,0,0,0.3)
-  @include gradient(#0a0a0a, rgba(10,10,10,0.3) 90%, #0a0a0a)
+  @include gradient(bottom, #0a0a0a, rgba(10,10,10,0.1) 90%, #0a0a0a)
   width: 100vw
-  height: inherit
+  height: 310px
 
 .header-logo
   position: relative
@@ -188,20 +188,8 @@ $menu-label-color: $white-ter
     vertical-align: middle
     display: inline
 
-// blog roll
-.blog-list-item.is-featured
-  background-color: #defcf2
-.blog-list-item header
-  display: flex
-  margin-bottom: 1em
-.blog-list-item .featured-thumbnail
-  flex-basis: 35%
-  margin: 0 1.5em 0 0
-
 // responsiveness
 +tablet-only
-  .blog-list-item .featured-thumbnail
-    flex-basis: 50%
   .navbar-start a 
     color: $black
 
@@ -217,12 +205,6 @@ $menu-label-color: $white-ter
     height: 301px
   .header-logo
     width: 150px
-  .blog-list-item header
-    display: block
-  .blog-list-item .featured-thumbnail
-    text-align: center
-    max-width: 70%
-    margin: 0 0 1em
 
 @keyframes moveDown 
   from 
