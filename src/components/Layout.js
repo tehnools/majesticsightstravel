@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState, useEffect, useRef} from 'react'
 import { Helmet } from 'react-helmet'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
@@ -6,10 +6,43 @@ import './all.sass'
 import useSiteMetadata from './SiteMetadata'
 import { withPrefix } from 'gatsby'
 
+
 const TemplateWrapper = ({ children }) => {
   const { title, description } = useSiteMetadata()
+  const [isSticky, setSticky] = useState(false)
+  const stickyRef = useRef(null)
+
+  const debounce = (func, wait = 10, immediate = true) => {
+    let timeOut
+    return () => {
+      let context = this,
+        args = [func, wait, immediate]
+      const later = () => {
+        timeOut = null
+        if (!immediate) func.apply(context, args)
+      }
+      const callNow = immediate && !timeOut
+      clearTimeout(timeOut)
+      timeOut = setTimeout(later, wait)
+      if (callNow) func.apply(context, args)
+    }
+  }
+
+  const handleScroll = ()=>{    
+    window.pageYOffset > stickyRef.current.getBoundingClientRect().bottom
+    ? setSticky(true)
+    : setSticky(false)
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", debounce(handleScroll))
+    return () => {
+      window.removeEventListener("scroll", () => handleScroll)
+    }
+  }, [])
+  
   return (
-    <div>
+    <>
       <Helmet>
         <html lang="en" />
         <title>{title}</title>
@@ -48,10 +81,10 @@ const TemplateWrapper = ({ children }) => {
           content={`${withPrefix('/')}img/og-image.jpg`}
         />
       </Helmet>
-      <Navbar />
-      <div>{children}</div>
+      <Navbar isSticky={isSticky} />
+      <div ref={stickyRef}>{children}</div>
       <Footer />
-    </div>
+    </>
   )
 }
 
