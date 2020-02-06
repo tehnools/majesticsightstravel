@@ -27,7 +27,7 @@ export const IndexPageTemplate = ({
           backgroundAttachment: `fixed`,
         }}
       >
-        <div className="black-overlay"></div>
+        <div className="black-overlay-bottom"></div>
         <img className="header-logo" src="/img/logo.png" />
       </div>
       <section className="section section-gradient">
@@ -59,18 +59,6 @@ export const IndexPageTemplate = ({
                       </h4>
                     </div>
                   </div>
-                  <div
-                    className="full-width-image margin-top-0"
-                    style={{
-                      backgroundImage: `url(${
-                        !!image2.childImageSharp ? image2.childImageSharp.fluid.src : image2
-                        })`,
-                      backgroundPosition: `top left`,
-                      backgroundAttachment: `fixed`,
-                    }}
-                  >
-                    {/* <div className="black-overlay"></div> */}
-                  </div>
                   {/* <Features gridItems={intro.blurbs} /> */}
                   <div className="columns">
                     <div className="column is-12 has-text-centered">
@@ -85,6 +73,24 @@ export const IndexPageTemplate = ({
           </div>
         </div>
       </section>
+      <div
+        className="full-width-image-short"
+        style={{
+          backgroundImage: `url(${
+            !!image2.childImageSharp ? image2.childImageSharp.fluid.src : image2
+            })`,
+          backgroundPosition: `top left`,
+          backgroundAttachment: `fixed`,
+          width: '100vw',
+          height: '300px',
+          backgroundSize: 'cover',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <div className="black-overlay"></div>
+      </div>
     </div>
   )
 
@@ -149,8 +155,14 @@ export const pageQuery = graphql`
           description
         }
         description
-        newsletter{
-          image
+        newsletter {
+          image {
+          childImageSharp {
+            fluid(maxWidth: 2048, quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
         }
       }
     }

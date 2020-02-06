@@ -10,7 +10,7 @@ $subtitle-color: $majestic-green
 $primary: $majestic-green
 $primary-invert: $majestic-green-invert
 $body-color: #000
-$black: #2b2523
+$black: #0a0a0a
   
 @mixin gradient($direction, $list...) 
   background: -webkit-linear-gradient($direction, $list)
@@ -38,7 +38,7 @@ navbar-item a
     margin-top: 0
 
 .section
-  background: black
+  background: $black
   color: white
 
 // Helper Classes
@@ -64,13 +64,21 @@ navbar-item a
   justify-content: center
   align-items: center
 
-.black-overlay
+.black-overlay-bottom
   position: absolute
   z-index: 1
   background-color: rgba(0,0,0,0.3)
-  @include gradient(bottom, black 1%, rgba(0,0,0,0.3))
+  @include gradient(bottom, $black 1%, rgba(0,0,0,0.3))
   width: 100vw
-  height: 601px
+  height: inherit
+
+.black-overlay
+  position: absolute
+  z-index: 2
+  background-color: rgba(0,0,0,0.3)
+  @include gradient(#0a0a0a, rgba(10,10,10,0.3) 90%, #0a0a0a)
+  width: 100vw
+  height: inherit
 
 .header-logo
   position: relative
@@ -121,7 +129,7 @@ navbar-item a
 .icon svg
   width: 1.5rem
   height: 1.5rem
-  fill: black
+  fill: $black
 
 .navbar-item.logo
   color: white
@@ -135,14 +143,14 @@ navbar-item a
   position: fixed
   animation: moveDown 0.5s ease-in-out
   .navbar-start a
-    color: black
+    color: $black
   .navbar-item.logo
-    color: black
+    color: $black
   .navbar-burger
-    color : black
+    color : $black
 
 .navbar-sticky > .navbar .logo
-  color: black
+  color: $black
 
 
 .navbar-brand .navbar-item.logo
@@ -195,14 +203,14 @@ $menu-label-color: $white-ter
   .blog-list-item .featured-thumbnail
     flex-basis: 50%
   .navbar-start a 
-    color: black
+    color: $black
 
 +mobile
   .navbar
     top: 0
     position: fixed
   .navbar-start a 
-    color: black
+    color: $black
   .full-width-image
     height: 300px
   .black-overlay
