@@ -82,7 +82,8 @@ const TemplateWrapper = ({ children }) => {
         />
       </Helmet>
       <Navbar isSticky={isSticky} />
-      <div ref={stickyRef}>{children}</div>
+      <div ref={stickyRef}></div>
+      <div>{children}</div>
       <Footer />
     </>
   )
