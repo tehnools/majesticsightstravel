@@ -29,12 +29,14 @@ const TemplateWrapper = ({ children }) => {
   }
 
   const handleScroll = ()=>{    
+    if(stickyRef.current) {
     window.pageYOffset > stickyRef.current.getBoundingClientRect().bottom
     ? setSticky(true)
     : setSticky(false)
+    }
   }
 
-  useEffect(() => {
+  useEffect(() => {    
     window.addEventListener("scroll", debounce(handleScroll))
     return () => {
       window.removeEventListener("scroll", () => handleScroll)
