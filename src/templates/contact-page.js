@@ -2,21 +2,59 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
-import Content, { HTMLContent } from '../components/Content'
 
-export const ContactPageTemplate = ({ title, content, contentComponent }) => {
-  const PageContent = contentComponent || Content
-
+export const ContactPageTemplate = ({ title, location, email, contacts }) => {
   return (
     <section className="section section--gradient">
       <div className="container">
-        <div className="columns">
-          <div className="column is-10 is-offset-1">
-            <div className="section">
-              <h2 className="title is-size-3 has-text-weight-bold is-bold-light">
-                {title}
-              </h2>
-              <PageContent className="content" content={content} />
+        <div className="section has-text-white">
+          <h1
+            className="title is-size-1 has-text-weight-bold is-bold-light has-text-white has-text-centered"
+          >
+            {title}
+          </h1>
+          <div class="columns">
+            <div class="column is-4">
+              <div class="card contact card-equal-height has-text-centered">
+                <header class="card-header">
+                  <p class="card-header-title title is-4 has-content-centered">
+                    Location
+                  </p>
+                </header>
+                <div class="card-content is-centered">
+                  {location}
+                </div>
+              </div>
+            </div>
+            <div class="column is-4">
+              <div class="card contact card-equal-height has-text-centered">
+                <header class="card-header">
+                  <p class="card-header-title title is-4 has-content-centered">
+                    Email
+                      </p>
+                </header>
+                <div class="card-content is-centered">
+                  {email}
+                </div>
+              </div>
+            </div>
+            <div class="column is-4">
+              <div class="card contact card-equal-height has-text-centered">
+                <header class="card-header">
+                  <p class="card-header-title title is-4 has-content-centered">
+                    Phone
+                      </p>
+                </header>
+                <div class="card-content is-centered">
+                  <div class="rows">
+                    {
+                      contacts.map(contact => <div className="row">
+                        {contact.name} : {contact.phoneNumber}
+                      </div>)
+                    }
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -27,37 +65,49 @@ export const ContactPageTemplate = ({ title, content, contentComponent }) => {
 
 ContactPageTemplate.propTypes = {
   title: PropTypes.string.isRequired,
-  content: PropTypes.string,
-  contentComponent: PropTypes.func,
+  location: PropTypes.string,
+  email: PropTypes.string,
+  contacts: PropTypes.object
 }
 
 const ContactPage = ({ data }) => {
-  const { markdownRemark: post } = data
+  const { frontmatter } = data.markdownRemark
 
   return (
     <Layout>
       <ContactPageTemplate
-        contentComponent={HTMLContent}
-        title={post.frontmatter.title}
-        content={post.html}
+        title={frontmatter.title}
+        location={frontmatter.location}
+        email={frontmatter.email}
+        contacts={frontmatter.contacts}
       />
     </Layout>
   )
 }
 
 ContactPage.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.shape({
+    markdownRemark: PropTypes.shape({
+      frontmatter: PropTypes.object,
+    }),
+  }),
 }
 
 export default ContactPage
 
 export const contactPageQuery = graphql`
-  query ContactPage($id: String!) {
-    markdownRemark(id: { eq: $id }) {
-      html
-      frontmatter {
-        title
+  query ContactPage {
+  markdownRemark(frontmatter: {templateKey: {eq: "contact-page"}}) {
+    frontmatter {
+      title
+      location
+      email
+      contacts {
+        name
+        phoneNumber
+        email
       }
     }
   }
+}
 `
