@@ -7,7 +7,7 @@ export const ContactPageTemplate = ({ title, location, email, contacts }) => {
   return (
     <section className="section section--gradient">
       <div className="container">
-        <div className="section has-text-white">
+        <div className="section">
           <h1
             className="title is-size-1 has-text-weight-bold is-bold-light has-text-white has-text-centered"
           >
