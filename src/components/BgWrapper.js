@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function BgWrapper() {
+export default function BgWrapper({image, children}) {
   return (
     <div>
       
