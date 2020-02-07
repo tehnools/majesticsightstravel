@@ -35,22 +35,22 @@ export const IndexPageTemplate = ({
               <div className="column is-10 is-offset-1">
                 <div className="content">
                   <div className="content">
-                    <div className="tile">
-                      <h1 className="title has-text-centered"
+                    <div className="tile has-content-centered">
+                      <h4 className="title is-size-1 has-text-centered"
                         style={{ color: 'white' }}
                       >
                         {mainpitch.title}
-                      </h1>
+                      </h4>
                     </div>
                     <div className="tile">
-                      <p className="subtitle"
+                      <p className="subtitle has-text-centered"
                         style={{ color: 'white' }}
                       >{mainpitch.description}</p>
                     </div>
                   </div>
                   <div className="columns">
                     <div className="column is-12">
-                      <h4 className="has-text-weight-semibold has-text-centered	is-size-4"
+                      <h4 className="has-text-weight-semibold	is-size-4 has-text-centered"
                         style={{ color: "white" }}
                       >
                         {heading}
